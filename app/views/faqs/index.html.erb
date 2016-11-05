@@ -1,0 +1,30 @@
+<% provide(:title, "FAQ") %>
+<h1>Frequently Asked Questions</h1>
+<% if logged_in? %>
+<% if current_user.admin? %>
+<div class="text-center">
+<%= link_to "Create FAQ", new_faq_path, class: "btn btn-primary" %>
+</div>
+<% end %>
+<% end %>
+<hr>
+<% @faqs.each do |faq| %>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <%= faq.title %>
+    <% if logged_in? %>
+    <% if current_user.admin? && !current_user?(faq) %>
+    <div class="pull-right">
+    <%= link_to "Edit", edit_faq_path(faq) %>
+    |
+    <%= link_to "Delete", faq, method: :delete,
+                            data: { confirm: "You sure?" } %>
+    </div>
+    <% end %>
+    <% end %>
+  </div>
+  <div class="panel-body">
+    <%= faq.content %>
+  </div>
+</div>
+<% end %>

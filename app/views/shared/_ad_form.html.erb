@@ -1,0 +1,22 @@
+<%= simple_form_for $ad do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+  <div class="form-group">
+    <%= f.input :ad_title, label: false, placeholder: "Title" %>
+  </div>
+  <div class="form-group">
+    <%= f.input :ad_description, label: false, placeholder: "Description" %>
+  </div>
+  <div class="form-group">
+    <%= f.input :ad_venue, label: false, placeholder: "Venue" %>
+  </div>
+  <div class="form-group">
+    <%= f.input :ad_date, label: 'Date' %>
+  </div>
+  <div class="form-group">
+    <%= f.input :ad_time, label: 'Time' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.submit "Post", class: "btn btn-primary" %>
+  </div>
+<% end %>

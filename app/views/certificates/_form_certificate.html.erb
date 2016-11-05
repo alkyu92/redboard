@@ -1,0 +1,47 @@
+<div class="panel panel-default">
+    <div class="panel-heading clearfix">
+        <h3 class="panel-title pull-left"><%= yield(:form_title) %></h3>
+    </div>
+    <div class="modal-body">
+        <%= simple_form_for @certificate do |f| %>
+        <%= render 'shared/error_messages', object: f.object %>
+
+        <div class="form-group">
+            <%= f.input :name, placeholder: "Your name", autofocus: true%>
+        </div>
+
+        <div class="form-group">
+            <%= f.input :department, placeholder: "Your department"%>
+        </div>
+
+        <div class="form-group">
+            <%= f.input :birthdate %>
+        </div>
+
+        <div class="form-group">
+            <%= f.input :graduation %>
+        </div>
+
+        <div class="form-group">
+            <%= f.input :copies, placeholder: "Number of copies"%>
+        </div>
+
+        <div class="form-group">
+            <%= f.input :phone, placeholder: "Your phone number"%>
+        </div>
+
+        <div class="form-group">
+            <%= f.input :language, collection: ["English","Japanese"] %>
+        </div>
+
+        <div class="form-group">
+            <%= f.input :description, placeholder: "Describe your application",
+            input_html: {rows: "5"} %>
+        </div>
+
+        <div class="form-group">
+            <%= f.button :submit, class: "btn btn-primary" %>
+        </div>
+        <% end %>
+    </div>
+</div>

@@ -1,0 +1,37 @@
+
+<div id="ad-<%= ad.id %>" class="panel panel-default">
+    <div class="panel-heading">
+      <% if ad.ad_title.length > 50 %>
+        <%= ad.ad_title.truncate(50) %>
+      <% else %>
+        <%= ad.ad_title %>
+      <% end %>
+        <br>
+        <small>
+            <% if current_user?(ad.user) && current_user.admin? %>
+            <%= link_to "delete", ad, method: :delete,
+                                     data: { confirm: "You sure?" } %>
+            <% end %>
+        </small>
+    </div>
+    <div class="panel-body">
+        <% if !ad.ad_description.nil? %>
+            <%= ad.ad_description %>
+          <hr>
+        <% end %>
+        <% if !ad.ad_venue.nil? %>
+        Venue :
+        <%= ad.ad_venue %>
+        <br>
+        <% end %>
+        <% if !ad.ad_date.nil? %>
+        Date :
+        <%= ad.ad_date.strftime("%e %b %Y") %>
+        <br>
+        <% end %>
+        <% if !ad.ad_time.nil? %>
+        Time :
+        <%= ad.ad_time.strftime("%H:%M") %>
+        <% end %>
+    </div>
+</div>

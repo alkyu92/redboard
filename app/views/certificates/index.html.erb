@@ -1,0 +1,58 @@
+<% provide(:title, 'Application Forms') %>
+<div class="container">
+    <!-- Page Header -->
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">
+                <%= yield(:title) %>
+            </h1>
+        </div>
+    </div>
+
+    <div class="panel panel-default bootcards-summary">
+        <div class="panel-heading">
+            <h3 class="panel-title">New Application Forms</h3>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <%= link_to(new_certificate_path, class: "bootcards-summary-item") do %>
+                <div class="col-xs-6 col-sm-4">
+                    <div class="panel panel-default text-center">
+                        <h4>Certificate Issuance Form</h4>
+                    </div>
+                </div>
+                <% end %>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel panel-default bootcards-summary">
+        <div class="panel-heading">
+            <h3 class="panel-title">Submitted Forms</h3>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <% @certificates.each do |certificate|%>
+                <%= link_to edit_certificate_path(certificate), class: "bootcards-summary-item" do %>
+                <div class="col-xs-6 col-sm-4">
+                    <div class="panel panel-default text-center">
+                        <h4>Certificate Issuance Form</h4>
+                        <small>
+                            <%= certificate.created_at.strftime("%e %b %Y")%>
+                            at
+                            <%= certificate.created_at.strftime("%H:%M")%>
+                            <% if current_user.admin? %>
+                            <span style="padding-left: 55px;">
+                            <%= link_to "Delete", certificate, method: :delete,
+                                              data: {confirm: "Are you sure?"}%>
+                            <% end %>
+                          </span>
+                        </small>
+                    </div>
+                </div>
+                <% end %>
+                <% end %>
+            </div>
+        </div>
+    </div>
+</div>

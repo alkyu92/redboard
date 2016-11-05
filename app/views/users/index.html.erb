@@ -1,0 +1,35 @@
+<% provide(:title, 'Find Friends') %>
+
+<h1><%= yield(:title) %></h1>
+
+<div class="row">
+    <%= will_paginate %>
+</div>
+
+<div class="row">
+  <div class="col-md-6">
+<div class="panel panel-default">
+  <% @users.each do |user| %>
+    <div class="panel-body">
+        <%= gravatar_for user, size: 65%>
+        <h4><%= link_to user.name, user %></h4>
+        <p class="text-muted">
+            <% if current_user.admin? && !current_user?(user) %>
+            <%= link_to "delete", user, method: :delete,
+                                        data: { confirm: "You sure?" } %>
+            <% end %>
+        </p>
+    </div>
+    <% end %>
+</div>
+</div>
+<div class="col-md-6">
+  <div class="panel panel-default">
+
+  </div>
+</div>
+</div>
+
+<div class="row">
+    <%= will_paginate %>
+</div>

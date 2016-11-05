@@ -1,0 +1,40 @@
+<div class="container-fluid white">
+
+    <div class="container">
+
+        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner" role="listbox">
+                <div class="item active">
+                    <small>Welcome to RedBoard!</small>
+                </div>
+                <% $ads_feed.each do |ad| %>
+                <div class="item">
+                    <small>
+                        <span style="font-weight: bold;">
+                        <% if ad.ad_title.length > 60 %>
+                            <%= ad.ad_title.truncate(60) %>
+                        <% else %>
+                            <%= ad.ad_title %>
+                        <% end %>
+                        </span>
+                        <% if ad.ad_description.length > 80 %>
+                          <%= ad.ad_description.truncate(80) %>
+                        <% else %>
+                          <%= ad.ad_description %>
+                        <% end %>
+                        <span class="pull-right">
+                        <span style="font-weight: bold;">Venue: </span>
+                          <%= ad.ad_venue %>
+                        <span style="font-weight: bold;">Date: </span>
+                          <%= ad.ad_date.strftime("%e %b %Y") %>
+                        <span style="font-weight: bold;">Time: </span>
+                          <%= ad.ad_time.strftime("%H:%M") %>
+                        </span>
+                    </small>
+                </div>
+                <% end %>
+            </div>
+        </div>
+    </div>
+</div>

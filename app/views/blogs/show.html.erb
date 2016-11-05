@@ -1,0 +1,35 @@
+<h4 class="text-center">Press F11 to enter or exit full screen</h4>
+<section id="full">
+    <header class="intro-header" style="background-image:
+    url('http://www.download-hd-wallpapers.com/wp-content/uploads/2014/08/dark-abstract-wallpaper2.jpg')">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1><%= @blog.blog_title %></h1>
+                    <h2 class="subheading"><%= @blog.blog_subtitle %></h2>
+                    <span class="meta">Posted by
+                        <%= link_to @blog.user.name, @blog.user %>
+                        <%= time_ago_in_words(@blog.created_at) %>
+                        ago</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Post Content -->
+    <article>
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <%= raw(@blog.blog_content) %>
+                <br><br><br>
+                <hr>
+                <div class="button-group text-center">
+                <% if current_user?(@blog.user) %>
+                <%= link_to 'Edit', edit_blog_path(@blog), class: "btn btn-primary" %>
+                <% end %>
+                <%= link_to 'Back', blogs_path, class: "btn btn-primary" %>
+              </div>
+            </div>
+        </div>
+    </article>
+</section>

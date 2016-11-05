@@ -1,0 +1,69 @@
+<% provide(:title, "Blogs") %>
+
+<header class="intro-header" style="background-image:
+    url('http://www.download-hd-wallpapers.com/wp-content/uploads/2014/08/dark-abstract-wallpaper2.jpg'">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="site-heading">
+                    <h1>Life in KIT</h1>
+                    <hr class="small">
+                    <span class="subheading">Lesson learnt worth to be shared</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<% if logged_in? %>
+<div class="center">
+    <%= link_to 'Share My Article', new_blog_path, class: "btn btn-primary" %>
+</div>
+<% end %>
+<!-- Main Content -->
+<div class="row">
+    <div class="center">
+        <%= will_paginate @blogs %>
+    </div>
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <% @blogs.each do |blog| %>
+        <hr>
+        <div class="post-preview">
+            <%= link_to blog do %>
+            <h2 class="post-title">
+                <%= blog.blog_title %>
+            </h2>
+            <h3 class="post-subtitle">
+                <%= blog.blog_subtitle %>
+            </h3>
+            <% end %>
+
+            <p class="post-meta">Posted by
+                <%= link_to blog.user.name, blog.user %>
+                <%= time_ago_in_words(blog.created_at) %>
+                ago
+                <% if logged_in? %>
+                <% if current_user.admin? || current_user?(blog.user) %>
+                <%= link_to 'Edit', edit_blog_path(blog) %>
+                |
+                <%= link_to "Delete", blog, method: :delete,
+                                                 data: { confirm: "You sure?" } %>
+                <% end %>
+                <% end %>
+            </p>
+            <% if blog.blog_content.length > 300 %>
+              <% trctcontent = blog.blog_content.truncate(300) %>
+              <%= raw(trctcontent) %>
+              <br>
+              <%= link_to 'Read more', blog %>
+            <% else %>
+              <%= raw(blog.blog_content) %>
+            <% end %>
+        </div>
+
+        <% end %>
+        <div class="center">
+            <%= will_paginate @blogs %>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,42 @@
+<% provide(:title, "Home") %>
+
+<% if logged_in? %>
+  <div class="row">
+    <aside class="col-md-3">
+      <section class="user_info">
+        <%= render 'shared/user_info' %>
+      </section>
+      <section class="stats">
+        <%= render 'shared/stats' %>
+      </section>
+    </aside>
+    <div class="col-md-5">
+      <h3>New Micropost</h3>
+      <section class="micropost_form">
+        <%= render 'shared/micropost_form' %>
+      </section>
+      <hr>
+      <h3>News Feed</h3>
+      <%= render 'shared/feed' %>
+    </div>
+    <aside class="col-md-4">
+      <% if current_user.admin? %>
+      <h3>New Advertisement</h3>
+      <%= render 'shared/ad_form' %>
+        <hr>
+      <% end %>
+      <%= render 'shared/ads_feed' %>
+    </aside>
+  </div>
+<% else %>
+<div class="center jumbotron">
+  <h1>Welcome to RedBoard</h1>
+
+  <h2>
+    Everything about KIT campus
+  </h2>
+
+  <%= link_to "Sign Up", signup_path, class: "btn btn-lg btn-primary" %>
+  <%= link_to "Log In", login_path, class: "btn btn-lg btn-primary" %>
+</div>
+<% end %>
